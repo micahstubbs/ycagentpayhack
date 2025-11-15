@@ -31,7 +31,11 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*
+.env
+.env.local
+.env.*.local
+.env.fast-parrot
+.env.bak
 
 # vercel
 .vercel
@@ -39,6 +43,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Backend build output
+dist/
+*.log
+cache/
+artifacts/
+typechain-types/
 
 # Ignored for the template, you probably want to remove it:
 package-lock.json
