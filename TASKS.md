@@ -8,9 +8,9 @@
 
 ## Progress Overview
 
-**Completed**: 11/15 tasks (73%)
+**Completed**: 12/15 tasks (80%)
 **In Progress**: 0/15 tasks
-**Remaining**: 4/15 tasks
+**Remaining**: 3/15 tasks
 
 ---
 
@@ -218,15 +218,20 @@
 
 ---
 
-### ⏳ Task 12: Anthropic SDK Agent Runner
-**Status**: Pending
+### ✅ Task 12: Anthropic SDK Agent Runner
+**Status**: Complete
+**Commit**: TBD
 **Description**: Agent execution framework using Anthropic SDK
 
-**Planned Deliverables**:
-- src/agents/agent-runner.ts
-- Tool execution loop
-- Message handling
-- Max turns configuration
+**Deliverables**:
+- ✅ src/agents/agent-runner.ts - Agent runner implementation
+- ✅ runAgent() function with AgentRunConfig interface
+- ✅ Anthropic SDK messages loop with claude-sonnet-4-20250514 model
+- ✅ Tool execution using unified executeTool from tools/index
+- ✅ Handles tool_use and end_turn stop reasons
+- ✅ Comprehensive logging of all agent activity
+- ✅ Max turns configuration (default: 10)
+- ✅ Error handling for tool execution failures
 
 ---
 
