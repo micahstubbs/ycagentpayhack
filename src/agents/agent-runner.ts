@@ -44,10 +44,13 @@ export async function runAgent(config: AgentRunConfig): Promise<string> {
     });
 
     // If agent is done (no tool use), return final response
-    if (response.stop_reason === 'end_turn') {
+    if (response.stop_reason === 'end_turn' || response.stop_reason === 'max_tokens') {
       const textBlock = response.content.find((block) => block.type === 'text');
       if (textBlock && 'text' in textBlock) {
         console.log(`\nAgent ${agentId} response:`, textBlock.text);
+        if (response.stop_reason === 'max_tokens') {
+          console.warn(`\n⚠️ Agent hit max_tokens limit - response may be truncated`);
+        }
         return textBlock.text;
       }
     }
