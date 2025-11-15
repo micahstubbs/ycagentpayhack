@@ -79,12 +79,20 @@ export class BaseService {
     principalEth: number,
     interestEth: number
   ): Promise<{ loanId: number; txHash: string }> {
-    const contract = this.getLoanEscrowContract();
+    const escrowContract = this.getLoanEscrowContract();
+    const invoiceNFT = this.getInvoiceNFTContract();
+    const escrowAddress = await escrowContract.getAddress();
     const invoiceNFTAddress = process.env.INVOICE_NFT_ADDRESS!;
     const principal = ethers.parseEther(principalEth.toString());
     const interest = ethers.parseEther(interestEth.toString());
 
-    const tx = await contract.createLoan(
+    // CRITICAL: Approve escrow to transfer NFT before creating loan
+    console.log(`[Base] Approving escrow ${escrowAddress} to transfer NFT ${invoiceTokenId}`);
+    const approvalTx = await invoiceNFT.approve(escrowAddress, invoiceTokenId);
+    await approvalTx.wait();
+    console.log(`[Base] NFT approved for escrow transfer`);
+
+    const tx = await escrowContract.createLoan(
       borrowerAddress,
       invoiceNFTAddress,
       invoiceTokenId,
