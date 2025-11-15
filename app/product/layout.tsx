@@ -1,6 +1,6 @@
 import ConvexClientProvider from "@/components/ConvexClientProvider";
 import { cn } from "@/lib/utils";
-import { ChatBubbleIcon, HomeIcon, ReaderIcon } from "@radix-ui/react-icons";
+import { ActivityLogIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { ReactNode } from "react";
 
@@ -19,18 +19,9 @@ function ProductMenu() {
   return (
     <aside className="w-48 border-r bg-muted/40 p-2">
       <nav className="flex h-full max-h-screen flex-col gap-2">
-        <MenuLink href="/product" active>
-          <ChatBubbleIcon className="h-4 w-4" />
-          Chat
-        </MenuLink>
-
-        <MenuLink href="https://docs.convex.dev">
-          <ReaderIcon className="h-4 w-4" />
-          Docs
-        </MenuLink>
-        <MenuLink href="/">
-          <HomeIcon className="h-4 w-4" />
-          Home
+        <MenuLink href="/product">
+          <ActivityLogIcon className="h-4 w-4" />
+          Dashboard
         </MenuLink>
       </nav>
     </aside>

@@ -9,20 +9,29 @@
 
 ### ✅ Issue #4: Stripe Configuration
 **Completed**: 2025-11-15
+**Time Taken**: ~30 minutes
 
 **Configured:**
 - ✅ Stripe account: IntentiveAI sandbox
 - ✅ Platform account ID: `acct_1SQlFHLRpIkSpfgf`
-- ✅ Secret key: Added to `.env`
+- ✅ Secret key: Added to `.env` (sk_test_51SQlFPQ...)
 - ✅ Stripe Connect: Enabled (Platform mode, Accounts v2 API)
 - ✅ Webhook endpoint: `https://glad-gull-498.convex.cloud/stripe/webhook`
 - ✅ Webhook events: `payment_intent.succeeded`, `transfer.created`
+- ✅ Webhook signing secret: Added to `.env`
 - ✅ Stripe CLI: Authenticated and tested
+
+**Verification:**
+```bash
+stripe --version  # v1.32.0
+stripe trigger payment_intent.succeeded  # ✅ Success
+```
 
 ---
 
 ### ✅ Issue #5: Anthropic API Configuration
 **Completed**: 2025-11-15
+**Time Taken**: ~10 minutes
 
 **Configured:**
 - ✅ Anthropic API key: Added to `.env`
@@ -56,8 +65,8 @@ Response: API works
 - `STRIPE_WEBHOOK_SECRET` ✅
 - `STRIPE_PLATFORM_ACCOUNT_ID` ✅
 - `ANTHROPIC_API_KEY` ✅
-- `NEXT_PUBLIC_CONVEX_URL` ✅
-- `CONVEX_DEPLOYMENT` ✅
+- `NEXT_PUBLIC_CONVEX_URL` ✅ (https://glad-gull-498.convex.cloud)
+- `CONVEX_DEPLOYMENT` ✅ (dev:glad-gull-498)
 
 ### Pending ⏳
 - `BASE_RPC_URL` (Issue #7)

@@ -208,7 +208,7 @@ export const GetStarted = () => {
                 boxShadow: '0 10px 25px -5px rgba(170, 196, 245, 0.3)'
               }}
             >
-              <Link href="/product" className="flex items-center">
+              <Link href="/signin" className="flex items-center">
                 Launch Demo
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>

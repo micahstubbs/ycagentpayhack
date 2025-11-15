@@ -6,13 +6,24 @@ import {
 
 const isSignInPage = createRouteMatcher(["/signin"]);
 const isProtectedRoute = createRouteMatcher(["/product(.*)"]);
+const isHomePage = createRouteMatcher(["/"]);
 
 export default convexAuthNextjsMiddleware(async (request, { convexAuth }) => {
-  if (isSignInPage(request) && (await convexAuth.isAuthenticated())) {
+  const isAuthenticated = await convexAuth.isAuthenticated();
+
+  // Redirect authenticated users from home to product
+  if (isHomePage(request) && isAuthenticated && request.nextUrl.pathname === "/") {
     return nextjsMiddlewareRedirect(request, "/product");
   }
-  if (isProtectedRoute(request) && !(await convexAuth.isAuthenticated())) {
-    return nextjsMiddlewareRedirect(request, "/signin");
+
+  // Redirect authenticated users from signin to product
+  if (isSignInPage(request) && isAuthenticated) {
+    return nextjsMiddlewareRedirect(request, "/product");
+  }
+
+  // Redirect unauthenticated users from product to home
+  if (isProtectedRoute(request) && !isAuthenticated) {
+    return nextjsMiddlewareRedirect(request, "/");
   }
 });
 
