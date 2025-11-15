@@ -125,17 +125,28 @@
 
 ---
 
-### ⏳ Task 8: Webhook Server with Convex
-**Status**: Pending
+### ✅ Task 8: Webhook Server with Convex
+**Status**: Complete
+**Commit**: Pending
 **Description**: Stripe webhook server integrated with Convex backend
 
-**Planned Deliverables**:
-- Convex setup (using pnpm)
-- Webhook endpoint for Stripe events
-- Event handlers (transfer.created, payment_intent.succeeded)
-- Integration with Locus service
+**Deliverables**:
+- ✅ convex/schema.ts - Updated with stripeEvents and fundingTransactions tables
+- ✅ convex/stripeWebhooks.ts - HTTP action to receive webhook events
+- ✅ convex/stripeWebhookHandlers.ts - Internal mutations for event processing
+- ✅ convex/locusIntegration.ts - Actions for Locus USDC deposits
+- ✅ convex/fundingQueries.ts - Queries for funding data
+- ✅ convex/http.ts - Updated with /stripe/webhook route
+- ✅ convex/WEBHOOKS.md - Comprehensive documentation
 
-**Note**: Will use Convex instead of Express as originally planned
+**Features**:
+- Idempotent webhook event processing
+- transfer.created handler - Deposits USDC to Locus wallet
+- payment_intent.succeeded handler - Logs successful funding
+- Database tracking of all events and transactions
+- Query API for funding history and balances
+
+**Note**: Convex is already set up in the project, webhook implementation complete
 
 ---
 
