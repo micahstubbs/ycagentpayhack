@@ -16,7 +16,8 @@
     "test": "echo \"Tests coming soon\"",
     "deploy:contracts": "npx hardhat run scripts/deploy.js --network baseSepolia",
     "init:agents": "tsc -p tsconfig.backend.json --skipLibCheck && node dist/scripts/init-agents.js",
-    "sync:agents": "tsc -p tsconfig.backend.json --skipLibCheck && node dist/scripts/sync-agents-to-convex.js"
+    "sync:agents": "tsc -p tsconfig.backend.json --skipLibCheck && node dist/scripts/sync-agents-to-convex.js",
+    "demo": "tsc -p tsconfig.backend.json --skipLibCheck && node dist/demo/run-demo.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.69.0",

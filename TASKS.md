@@ -8,9 +8,9 @@
 
 ## Progress Overview
 
-**Completed**: 12/15 tasks (80%)
+**Completed**: 13/15 tasks (87%)
 **In Progress**: 0/15 tasks
-**Remaining**: 3/15 tasks
+**Remaining**: 2/15 tasks
 
 ---
 
@@ -235,14 +235,28 @@
 
 ---
 
-### ⏳ Task 13: Demo Script - End-to-End Flow
-**Status**: Pending
+### ✅ Task 13: Demo Script - End-to-End Flow
+**Status**: Complete
+**Commit**: TBD
 **Description**: Autonomous demo showing full lending marketplace flow
 
-**Planned Deliverables**:
-- src/demo/run-demo.ts
-- End-to-end flow: funding → loan → credit analysis → settlement
-- Console logging of all steps
+**Deliverables**:
+- ✅ src/demo/run-demo.ts - Complete end-to-end demo implementation
+- ✅ Convex integration - Loads agents from database instead of file registry
+- ✅ 8-step demo flow:
+  1. Fund lender agent with $1000 (Stripe → Locus)
+  2. Business agent mints invoice NFT ($1000, 30 days)
+  3. Business agent requests loan
+  4. Lender pays analyst $20 USDC for credit analysis
+  5. Credit analyst performs analysis and recommends terms
+  6. Lender executes loan ($800 principal, $40 interest)
+  7. Business agent pays $800 USDC for H200 compute
+  8. Invoice payment and loan settlement
+- ✅ Final balance reporting showing all agent profits/expenses
+- ✅ package.json script: `yarn demo`
+- ✅ Comprehensive logging with step-by-step progress
+- ✅ Error handling and validation
+- ✅ Mock compute provider wallet creation
 
 ---
 
@@ -319,11 +333,10 @@
 
 ## Next Steps
 
-1. **Task 13**: Demo Script - End-to-End Flow
-2. **Task 14**: README and Documentation
-3. **Task 15**: Final Testing & Verification
+1. **Task 14**: README and Documentation
+2. **Task 15**: Final Testing & Verification
 
 ---
 
-**Last Updated**: Task 12 completed
+**Last Updated**: Task 13 completed
 **Branch**: feature/hackathon-implementation
