@@ -1,0 +1,263 @@
+# Hackathon Implementation Tasks
+
+**Project**: Invoice-Backed Lending Marketplace for AI Agents
+**Event**: Agentic Payments Hackathon by Locus @ YC HQ
+**Branch**: `feature/hackathon-implementation`
+
+---
+
+## Progress Overview
+
+**Completed**: 6/15 tasks (40%)
+**In Progress**: 0/15 tasks
+**Remaining**: 9/15 tasks
+
+---
+
+## Task Status
+
+### ✅ Task 1: Project Setup & Dependencies
+**Status**: Complete
+**Commit**: `6a81b36`
+**Description**: Initialize TypeScript project with all dependencies (Stripe, Anthropic SDK, ethers.js, Express, Hardhat)
+
+**Deliverables**:
+- ✅ package.json with dependencies and scripts
+- ✅ tsconfig.json for TypeScript configuration
+- ✅ .env.example with all required environment variables
+- ✅ Project directory structure (src/agents, src/services, src/api, src/utils)
+
+---
+
+### ✅ Task 2: Smart Contracts - InvoiceNFT
+**Status**: Complete
+**Commit**: `ad8f6d5`
+**Description**: ERC-721 NFT contract representing receivables/invoices
+
+**Deliverables**:
+- ✅ contracts/InvoiceNFT.sol
+- ✅ test/InvoiceNFT.test.js
+- ✅ 2 passing tests (mint, payment)
+- ✅ Hardhat configuration
+
+**Test Results**: 2/2 passing (77ms)
+
+---
+
+### ✅ Task 3: Smart Contracts - LoanEscrow
+**Status**: Complete
+**Commit**: `34b4585`
+**Description**: Escrow contract for invoice-backed loans using NFT collateral
+
+**Deliverables**:
+- ✅ contracts/LoanEscrow.sol
+- ✅ test/LoanEscrow.test.js
+- ✅ 2 passing tests (loan creation, settlement)
+- ✅ Integration with InvoiceNFT
+
+**Test Results**: 4/4 passing total (138ms)
+
+---
+
+### ✅ Task 4: Deploy Smart Contracts to Base Sepolia
+**Status**: Complete (Infrastructure Ready)
+**Commit**: `811aae5`
+**Description**: Deployment infrastructure for Base Sepolia testnet
+
+**Deliverables**:
+- ✅ scripts/deploy.js deployment script
+- ✅ DEPLOYMENT.md comprehensive guide
+- ✅ QUICK_DEPLOY.md quick-start guide
+- ✅ .env.mock template
+
+**Note**: Actual deployment requires user's private key and testnet ETH
+
+---
+
+### ✅ Task 5: Stripe Service - Connect Account Management
+**Status**: Complete
+**Commit**: `cd0c010`
+**Description**: Stripe Connect service for managing AI agent financial accounts
+
+**Deliverables**:
+- ✅ src/types/agent.types.ts (AgentType, AgentIdentity, AgentBalances)
+- ✅ src/services/stripe.service.ts (StripeService class)
+- ✅ Methods: createConnectAccount, getConnectAccountBalance, createFundingPaymentIntent, transferToConnectAccount, verifyWebhookSignature
+
+**Code Review**: B+ (Excellent for hackathon, production would need error handling)
+
+---
+
+### ✅ Task 6: Locus Service - Mock Implementation
+**Status**: Complete
+**Commit**: `4af5068`
+**Description**: Mock Locus service for simulating USDC payments between agents
+
+**Deliverables**:
+- ✅ src/services/locus.service.ts (LocusService class)
+- ✅ Methods: depositUSDC, getBalance, transfer, createWallet
+- ✅ In-memory state management
+
+**Code Review**: Approved (Good for hackathon demo)
+
+---
+
+### ⏳ Task 7: Agent Registry & Initialization
+**Status**: Pending
+**Description**: Agent identity management and initialization scripts
+
+**Planned Deliverables**:
+- src/services/agent-registry.service.ts
+- src/scripts/init-agents.ts
+- data/agent-registry.json
+- Create 3 agents: Business, Lender, Credit Analyst
+
+---
+
+### ⏳ Task 8: Webhook Server with Convex
+**Status**: Pending
+**Description**: Stripe webhook server integrated with Convex backend
+
+**Planned Deliverables**:
+- Convex setup (using pnpm)
+- Webhook endpoint for Stripe events
+- Event handlers (transfer.created, payment_intent.succeeded)
+- Integration with Locus service
+
+**Note**: Will use Convex instead of Express as originally planned
+
+---
+
+### ⏳ Task 9: Funding Flow API with Convex
+**Status**: Pending
+**Description**: API endpoints for funding agents via Stripe
+
+**Planned Deliverables**:
+- Funding intent creation endpoint
+- Funding execution endpoint
+- Agent balance query endpoint
+- Convex mutations/queries
+
+---
+
+### ⏳ Task 10: Anthropic SDK Agent - Base Tools
+**Status**: Pending
+**Description**: Agent tools for interacting with Base smart contracts
+
+**Planned Deliverables**:
+- src/services/base.service.ts
+- src/agents/tools/base.tools.ts
+- Tools: mint_invoice_nft, get_invoice_details, create_loan
+
+---
+
+### ⏳ Task 11: Complete Agent Tools (Stripe, Locus, Base)
+**Status**: Pending
+**Description**: Full suite of agent tools for all services
+
+**Planned Deliverables**:
+- src/agents/tools/stripe.tools.ts
+- src/agents/tools/locus.tools.ts
+- src/agents/tools/index.ts (unified tool executor)
+
+---
+
+### ⏳ Task 12: Anthropic SDK Agent Runner
+**Status**: Pending
+**Description**: Agent execution framework using Anthropic SDK
+
+**Planned Deliverables**:
+- src/agents/agent-runner.ts
+- Tool execution loop
+- Message handling
+- Max turns configuration
+
+---
+
+### ⏳ Task 13: Demo Script - End-to-End Flow
+**Status**: Pending
+**Description**: Autonomous demo showing full lending marketplace flow
+
+**Planned Deliverables**:
+- src/demo/run-demo.ts
+- End-to-end flow: funding → loan → credit analysis → settlement
+- Console logging of all steps
+
+---
+
+### ⏳ Task 14: README and Documentation
+**Status**: Pending
+**Description**: Comprehensive README and project documentation
+
+**Planned Deliverables**:
+- README.md with architecture, setup, API docs
+- Usage examples
+- Hackathon track alignment
+
+---
+
+### ⏳ Task 15: Final Testing & Verification
+**Status**: Pending
+**Description**: Final integration testing and verification
+
+**Planned Deliverables**:
+- All tests passing
+- Deployment verified on Base Sepolia
+- Demo flow tested end-to-end
+- Final commit and push
+
+---
+
+## Technology Stack
+
+### Smart Contracts
+- Solidity 0.8.20
+- Hardhat
+- OpenZeppelin
+- Base Sepolia (L2)
+
+### Backend
+- TypeScript
+- Node.js
+- Convex (backend platform) - **using pnpm**
+- Express (legacy API endpoints)
+
+### AI & Agents
+- Anthropic SDK
+- Claude Sonnet 4.5
+
+### Payments & Finance
+- Stripe Connect
+- Locus (mock for demo)
+
+### Blockchain
+- ethers.js v6
+- Base (Coinbase L2)
+
+---
+
+## Commit History
+
+| Task | Commit SHA | Message |
+|------|------------|---------|
+| 1 | `6a81b36` | chore: initialize TypeScript project with dependencies |
+| 1 (fix) | `55e83be` | fix: rename TypeScript config to standard filename |
+| 2 | `ad8f6d5` | feat: add InvoiceNFT smart contract with tests |
+| 3 | `34b4585` | feat: add LoanEscrow smart contract with tests |
+| 4 | `811aae5` | feat: add deployment script for Base Sepolia |
+| 5 | `cd0c010` | feat: add Stripe Connect service for agent accounts |
+| 6 | `4af5068` | feat: add mock Locus service for agent payments |
+
+---
+
+## Next Steps
+
+1. **Task 7**: Implement Agent Registry & Initialization
+2. **Task 8**: Set up Convex and implement webhook server
+3. **Task 9**: Build funding flow API with Convex
+4. Continue through remaining tasks...
+
+---
+
+**Last Updated**: Task 6 completed
+**Branch**: feature/hackathon-implementation
