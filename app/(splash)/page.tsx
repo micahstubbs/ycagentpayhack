@@ -1,4 +1,4 @@
-import { GetStarted } from "@/app/(splash)/GetStarted/GetStarted";
+import { GetStarted } from "./GetStarted/GetStarted";
 
 export default function HomePage() {
   return <GetStarted />;

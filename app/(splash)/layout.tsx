@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ModeToggle } from "../../components/ModeToggle";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import Link from "next/link";
 import { ReactNode } from "react";
 
@@ -30,7 +30,7 @@ export default function SplashPageLayout({
             >
               Docs
             </Link>
-            <ModeToggle />
+            <ThemeToggle />
             <Link href="/product">
               <Button 
                 size="sm" 
