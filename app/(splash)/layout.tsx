@@ -1,5 +1,7 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { SimpleThemeToggle } from "@/components/SimpleThemeToggle";
 import Link from "next/link";
 import { ReactNode } from "react";
 
@@ -30,7 +32,7 @@ export default function SplashPageLayout({
             >
               Docs
             </Link>
-            <ThemeToggle />
+            <SimpleThemeToggle />
             <Link href="/product">
               <Button 
                 size="sm" 
