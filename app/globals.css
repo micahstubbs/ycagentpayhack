@@ -68,3 +68,27 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  /* Subtle scale animation on hover */
+  @keyframes subtle-scale {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+  }
+  
+  /* Smooth fade in */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
