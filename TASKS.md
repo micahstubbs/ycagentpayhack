@@ -262,7 +262,7 @@
 
 ### ✅ Task 14: README and Documentation
 **Status**: Complete
-**Commit**: (pending)
+**Commit**: `6c7c63e`
 **Description**: Comprehensive README and project documentation
 
 **Deliverables**:
@@ -342,13 +342,13 @@
 | 11 | `0546951` | feat: implement Task 11 - Complete agent tool system for Stripe, Locus, and Base |
 | 12 | `9eb320b` | feat: implement Task 12 - Anthropic SDK agent runner with tool execution |
 | 13 | `eff07eb` | feat: implement Task 13 - End-to-end demo script with Convex integration |
+| 14 | `6c7c63e` | docs: create comprehensive README with project documentation |
 
 ---
 
 ## Next Steps
 
-1. **Task 14**: README and Documentation
-2. **Task 15**: Final Testing & Verification
+1. **Task 15**: Final Testing & Verification
 
 ---
 
