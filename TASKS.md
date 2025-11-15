@@ -152,7 +152,7 @@
 
 ### ✅ Task 9: Funding Flow API with Convex
 **Status**: Complete
-**Commit**: (pending)
+**Commit**: `328c1f1`
 **Description**: Convex mutations, queries, and actions for funding agents via Stripe
 
 **Deliverables**:
@@ -283,17 +283,18 @@
 | 6 | `4af5068` | feat: add mock Locus service for agent payments |
 | 7 | `ace318c` | feat: add agent registry and initialization script |
 | 8 | `3319f36` | feat: implement Stripe webhook handling with Convex |
+| 9 | `328c1f1` | feat: implement Task 9 - Funding Flow API with Convex |
 
 ---
 
 ## Next Steps
 
-1. **Task 9**: Build funding flow API with Convex
-2. **Task 10**: Implement Anthropic SDK Agent - Base Tools
-3. **Task 11**: Complete Agent Tools (Stripe, Locus, Base)
+1. **Task 10**: Implement Anthropic SDK Agent - Base Tools
+2. **Task 11**: Complete Agent Tools (Stripe, Locus, Base)
+3. **Task 12**: Anthropic SDK Agent Runner
 4. Continue through remaining tasks...
 
 ---
 
-**Last Updated**: Task 8 completed
+**Last Updated**: Task 9 completed
 **Branch**: feature/hackathon-implementation
