@@ -237,7 +237,7 @@
 
 ### ✅ Task 13: Demo Script - End-to-End Flow
 **Status**: Complete
-**Commit**: TBD
+**Commit**: `eff07eb`
 **Description**: Autonomous demo showing full lending marketplace flow
 
 **Deliverables**:
@@ -328,6 +328,7 @@
 | 10 | `8c3992f` | feat: implement Task 10 - Base service and agent tools for smart contracts |
 | 11 | `0546951` | feat: implement Task 11 - Complete agent tool system for Stripe, Locus, and Base |
 | 12 | `9eb320b` | feat: implement Task 12 - Anthropic SDK agent runner with tool execution |
+| 13 | `eff07eb` | feat: implement Task 13 - End-to-end demo script with Convex integration |
 
 ---
 
