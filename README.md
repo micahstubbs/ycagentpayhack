@@ -1,42 +1,86 @@
-# Welcome to your Convex + Next.js + Convex Auth app
+# Invoice-Backed Lending for AI Agents
 
-This is a [Convex](https://convex.dev/) project created with [`npm create convex`](https://www.npmjs.com/package/create-convex).
+Built for the **Agentic Payments Hackathon** by Locus @ YC HQ
 
-After the initial setup (<2 minutes) you'll have a working full-stack app using:
+An autonomous agent marketplace where AI agents obtain liquidity by leveraging invoice NFTs as collateral. This project bridges traditional finance (Stripe) with the crypto-native agent economy (Locus + Base).
 
-- Convex as your backend (database, server logic)
-- [Convex Auth](https://labs.convex.dev/auth) for your authentication implementation
-- [React](https://react.dev/) as your frontend (web page interactivity)
-- [Next.js](https://nextjs.org/) for optimized web hosting and page routing
-- [Tailwind](https://tailwindcss.com/) and [shadcn/ui](https://ui.shadcn.com/) for building great looking accessible UI fast
+## 🎯 Overview
 
-## Get started
+This project demonstrates:
 
-If you just cloned this codebase and didn't use `npm create convex`, run:
+- **Stripe Connect** - Fiat on-ramp for funding AI agents
+- **Locus** - Agent-to-agent USDC payment infrastructure
+- **Base L2** - Smart contracts for invoice NFTs and trustless escrow
+- **Anthropic SDK** - Autonomous agent decision-making
+- **Next.js + Convex** - Modern full-stack architecture
 
-```
+## 🚀 Tech Stack
+
+- [Next.js](https://nextjs.org/) - React framework with App Router
+- [Convex](https://convex.dev/) - Backend database and server logic
+- [Convex Auth](https://labs.convex.dev/auth) - Authentication
+- [Tailwind CSS](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/) - UI components
+- [Stripe Connect](https://stripe.com/connect) - Agent funding infrastructure
+- [Locus](https://paywithlocus.com/) - Agent payment rails
+- [Base](https://base.org/) - L2 blockchain for smart contracts
+- [Anthropic SDK](https://www.anthropic.com/) - AI agent orchestration
+
+## 🎨 Landing Page Features
+
+The landing page features an Apple-inspired minimal design:
+
+- **Sophisticated Grid Animation** - Interactive mesh that responds to mouse movement
+- **Neutral Monochrome Palette** - Clean blacks, whites, and grays for professional aesthetic
+- **Refined Typography** - Large, bold headlines with careful spacing and hierarchy
+- **Subtle Interactions** - Smooth hover states and transitions without distraction
+- **Responsive Design** - Mobile-first approach optimized for all devices
+- **Feature Cards** - Clean cards highlighting trustless escrow, agent economy, and instant liquidity
+
+## 🏃 Get Started
+
+```bash
+# Install dependencies
 npm install
+
+# Run development server
 npm run dev
 ```
 
-If you're reading this README on GitHub and want to use this template, run:
+Open [http://localhost:3000](http://localhost:3000) to see the landing page.
+
+## 📁 Project Structure
 
 ```
-npm create convex@latest -- -t nextjs-convexauth-shadcn
+├── app/
+│   ├── (splash)/              # Landing page with canvas animation
+│   │   └── GetStarted/        # Main landing component
+│   ├── product/               # Demo application (requires sign-in)
+│   ├── signin/                # Authentication page
+│   └── layout.tsx             # Root layout with metadata
+├── components/                # Reusable UI components
+├── convex/                    # Backend logic and database
+│   ├── auth.ts               # Authentication configuration
+│   └── messages.ts           # Chat backend
+├── Docs/                      # Project documentation
+│   ├── plans/                # Design and implementation plans
+│   └── *.md                  # Technical documentation
+└── public/                    # Static assets
 ```
 
-## The app
+## 🎯 Key Features
 
-The app is a basic multi-user chat. Walkthrough of the source code:
+### Landing Page
 
-- [convex/auth.ts](./convex/auth.ts) configures the available authentication methods
-- [convex/messages.ts](./convex/messages.ts) is the chat backend implementation
-- [proxy.ts](./proxy.ts) determines which pages require sign-in
-- [app/layout.tsx](./app/layout.tsx) is the main app layout
-- [app/(splash)/page.tsx](<./app/(splash)/page.tsx>) is the splash page (doesn't require sign-in)
-- [app/product/layout.tsx](./app/product/layout.tsx) is the "product" layout for the [product page](./app/product/page.tsx) (requires sign-in)
-- [app/signin/page.tsx](./app/signin/page.tsx) is the sign-in page
-- [app/product/Chat/Chat.tsx](./app/product/Chat/Chat.tsx) is the chat frontend
+- **Canvas Animation** - Real-time particle network visualization
+- **Responsive Design** - Works seamlessly on all devices
+- **Dark/Light Mode** - Theme toggle support
+- **Smooth Animations** - Hover effects and transitions
+
+### Architecture
+
+- **Hybrid Approach** - Off-chain coordination, on-chain settlement
+- **Agent Tools** - Stripe, Locus, and Base smart contract integrations
+- **Autonomous Flow** - End-to-end agent decision-making
 
 ## Configuring other authentication methods
 
