@@ -2,10 +2,13 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
+// Global state for mock Locus balances (shared across all instances)
+const globalBalances = new Map<string, number>();
+
 // Mock Locus service for hackathon
 // Replace with real Locus SDK when available
 export class LocusService {
-  private balances: Map<string, number> = new Map();
+  private balances: Map<string, number> = globalBalances;
 
   async depositUSDC(agentId: string, amount: number): Promise<string> {
     const currentBalance = this.balances.get(agentId) || 0;
