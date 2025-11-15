@@ -1,5 +1,6 @@
 import { httpAction } from "./_generated/server";
 import { internal } from "./_generated/api";
+import Stripe from "stripe";
 
 /**
  * Stripe Webhook Handler for Convex
@@ -21,10 +22,40 @@ export const handleStripeWebhook = httpAction(async (ctx, request) => {
     // Get the raw body for signature verification
     const body = await request.text();
 
-    // Parse the event data
-    const event = JSON.parse(body);
+    // CRITICAL: Verify webhook signature before processing
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
-    console.log(`[Convex Webhook] Received event: ${event.type}`);
+    if (!webhookSecret) {
+      console.warn("[Convex Webhook] WARNING: No STRIPE_WEBHOOK_SECRET set - skipping verification (dev mode)");
+      // In dev mode without secret, parse directly (insecure but allows testing)
+      const event = JSON.parse(body);
+      console.log(`[Convex Webhook] DEV MODE - Received unverified event: ${event.type}`);
+    } else {
+      // Production mode: verify signature
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!,{
+        apiVersion: '2025-10-29.clover' as any,
+      });
+
+      const event = stripe.webhooks.constructEvent(
+        body,
+        signature,
+        webhookSecret
+      );
+
+      console.log(`[Convex Webhook] ✅ Verified event: ${event.type}`);
+    }
+
+    // Parse event for processing (use verified event if available, or parsed for dev)
+    const event = webhookSecret
+      ? (() => {
+          const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+            apiVersion: '2025-10-29.clover' as any,
+          });
+          return stripe.webhooks.constructEvent(body, signature, webhookSecret);
+        })()
+      : JSON.parse(body);
+
+    console.log(`[Convex Webhook] Processing event: ${event.type}`);
 
     // Store the event in the database
     await ctx.runMutation(internal.stripeWebhookHandlers.recordWebhookEvent, {
