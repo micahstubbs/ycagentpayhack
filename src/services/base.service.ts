@@ -12,6 +12,17 @@ export class BaseService {
   private wallet: ethers.Wallet;
 
   constructor() {
+    // Validate required environment variables
+    const required = ['BASE_RPC_URL', 'PRIVATE_KEY', 'INVOICE_NFT_ADDRESS', 'LOAN_ESCROW_ADDRESS'];
+    const missing = required.filter(key => !process.env[key]);
+
+    if (missing.length > 0) {
+      throw new Error(
+        `Missing required environment variables for BaseService: ${missing.join(', ')}\n` +
+        `Please ensure your .env file is configured correctly. See .env.example for reference.`
+      );
+    }
+
     this.provider = new ethers.JsonRpcProvider(process.env.BASE_RPC_URL);
     this.wallet = new ethers.Wallet(process.env.PRIVATE_KEY!, this.provider);
   }
