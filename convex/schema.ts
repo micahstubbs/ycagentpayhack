@@ -34,4 +34,13 @@ export default defineSchema({
     createdAt: v.number(),
     completedAt: v.optional(v.number()),
   }).index("by_agent", ["agentId"]),
+
+  // Agent registry (replaces file-based agent-registry.json)
+  agents: defineTable({
+    agentId: v.string(),
+    agentType: v.string(), // "business", "lender", "analyst"
+    stripeConnectAccountId: v.string(),
+    locusWalletAddress: v.string(),
+    baseWalletAddress: v.string(),
+  }).index("by_agent_id", ["agentId"]),
 });

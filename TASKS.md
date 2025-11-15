@@ -8,9 +8,9 @@
 
 ## Progress Overview
 
-**Completed**: 8/15 tasks (53%)
+**Completed**: 9/15 tasks (60%)
 **In Progress**: 0/15 tasks
-**Remaining**: 7/15 tasks
+**Remaining**: 6/15 tasks
 
 ---
 
@@ -150,15 +150,27 @@
 
 ---
 
-### ⏳ Task 9: Funding Flow API with Convex
-**Status**: Pending
-**Description**: API endpoints for funding agents via Stripe
+### ✅ Task 9: Funding Flow API with Convex
+**Status**: Complete
+**Commit**: (pending)
+**Description**: Convex mutations, queries, and actions for funding agents via Stripe
 
-**Planned Deliverables**:
-- Funding intent creation endpoint
-- Funding execution endpoint
-- Agent balance query endpoint
-- Convex mutations/queries
+**Deliverables**:
+- ✅ convex/funding.ts - Complete funding API implementation
+- ✅ createFundingIntent action - Creates Stripe Payment Intent
+- ✅ executeFunding action - Transfers to Connect account and deposits USDC
+- ✅ getAgentBalances action - Queries Stripe + Locus + Convex balances
+- ✅ getAllAgentBalances query - Admin dashboard summary
+- ✅ getAgentFundingHistory query - Transaction history
+- ✅ recordFundingTransaction mutation - Internal transaction recording
+- ✅ convex/FUNDING_API.md - Comprehensive API documentation
+
+**Features**:
+- Mock and real Stripe mode support
+- Integration with StripeService, LocusService, AgentRegistry
+- Error handling and validation
+- Database tracking of all transactions
+- Complete balance queries across all systems
 
 ---
 
