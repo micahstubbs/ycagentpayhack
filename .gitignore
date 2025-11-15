@@ -51,5 +51,10 @@ cache/
 artifacts/
 typechain-types/
 
+# Agent registry data
+data/agent-registry.json
+
 # Ignored for the template, you probably want to remove it:
 package-lock.json
+# Convex compiled files
+convex/**/*.js

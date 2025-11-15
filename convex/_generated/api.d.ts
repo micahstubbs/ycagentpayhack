@@ -8,9 +8,15 @@
  * @module
  */
 
+import type * as agents from "../agents.js";
 import type * as auth from "../auth.js";
+import type * as funding from "../funding.js";
+import type * as fundingQueries from "../fundingQueries.js";
 import type * as http from "../http.js";
+import type * as locusIntegration from "../locusIntegration.js";
 import type * as messages from "../messages.js";
+import type * as stripeWebhookHandlers from "../stripeWebhookHandlers.js";
+import type * as stripeWebhooks from "../stripeWebhooks.js";
 import type * as users from "../users.js";
 
 import type {
@@ -20,9 +26,15 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  agents: typeof agents;
   auth: typeof auth;
+  funding: typeof funding;
+  fundingQueries: typeof fundingQueries;
   http: typeof http;
+  locusIntegration: typeof locusIntegration;
   messages: typeof messages;
+  stripeWebhookHandlers: typeof stripeWebhookHandlers;
+  stripeWebhooks: typeof stripeWebhooks;
   users: typeof users;
 }>;
 

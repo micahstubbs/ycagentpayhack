@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice-Backed Lending Marketplace - Architecture Diagrams</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            sequence: {
+                useMaxWidth: true,
+                wrap: true
+            }
+        });
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 1rem 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        nav {
+            background: #f8f9fa;
+            padding: 1rem 2rem;
+            border-bottom: 2px solid #e9ecef;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            display: inline-block;
+            margin-right: 2rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #764ba2;
+        }
+
+        .content {
+            padding: 3rem 2rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 100px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #764ba2;
+            margin: 2rem 0 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #555;
+            font-size: 1.1rem;
+        }
+
+        .diagram {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+
+        .info-box h4 {
+            color: #1976D2;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏦 Invoice-Backed Lending Marketplace</h1>
+            <p class="subtitle">Architecture Diagrams - AI Agents Meet DeFi</p>
+            <div>
+                <span class="badge">Stripe Connect</span>
+                <span class="badge">Locus</span>
+                <span class="badge">Base L2</span>
+                <span class="badge">Anthropic SDK</span>
+                <span class="badge">Convex</span>
+            </div>
+        </header>
+
+        <nav>
+            <a href="#overview">Overview</a>
+            <a href="#complete">Complete Architecture</a>
+            <a href="#flow">Data Flow</a>
+            <a href="#locus">Locus Layer</a>
+            <a href="#transactions">Transactions</a>
+            <a href="#state">State Management</a>
+        </nav>
+
+        <div class="content">
+            <section id="overview">
+                <h2>Overview</h2>
+                <p>
+                    This project demonstrates a complete invoice-backed lending marketplace where AI agents
+                    can obtain liquidity by leveraging invoice NFTs as collateral. The system bridges traditional
+                    finance (Stripe) with autonomous agent commerce (Locus + Base).
+                </p>
+
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Payment Layers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Platform Integrations</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">Agent Tools</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Demo Steps</div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>Three-Layer Architecture</h4>
+                    <p style="margin: 0;">
+                        <strong>Stripe</strong> (Fiat on-ramp) →
+                        <strong>Locus</strong> (Agent payments) →
+                        <strong>Base</strong> (Trustless settlement)
+                    </p>
+                </div>
+            </section>
+
+            <section id="complete">
+                <h2>Complete System Architecture</h2>
+                <p>
+                    This diagram shows all components and their interactions across the five layers:
+                    Fiat (Stripe), Backend (Convex), Agent Payments (Locus), Settlement (Base), and AI Agents (Anthropic).
+                </p>
+
+                <div class="diagram">
+                    <div class="mermaid">
+graph TB
+    subgraph "Fiat Layer - Traditional Finance"
+        User[Human User]
+        StripeCheckout[Stripe Checkout]
+        StripePlatform[Stripe Platform Account]
+        StripeConnect1[Stripe Connect<br/>Business Agent]
+        StripeConnect2[Stripe Connect<br/>Lender Agent]
+        StripeConnect3[Stripe Connect<br/>Analyst Agent]
+    end
+
+    subgraph "Backend Platform - Convex Serverless"
+        ConvexAPI[Convex HTTP Actions]
+        ConvexDB[(Convex Database)]
+        WebhookHandler[Webhook Handler<br/>stripeWebhooks.ts]
+        FundingAPI[Funding API<br/>funding.ts]
+        AgentRegistry[Agent Registry<br/>agents.ts]
+
+        ConvexDB --> |stores| Agents[agents table]
+        ConvexDB --> |stores| StripeEvents[stripeEvents table]
+        ConvexDB --> |stores| FundingTx[fundingTransactions table]
+    end
+
+    subgraph "Agent Payment Layer - Locus"
+        LocusService[LocusService<br/>Mock Implementation]
+        LocusWallet1[Locus Wallet<br/>Business: 1000 USDC]
+        LocusWallet2[Locus Wallet<br/>Lender: 1000 USDC]
+        LocusWallet3[Locus Wallet<br/>Analyst: 20 USDC]
+        LocusWallet4[Locus Wallet<br/>Compute: 800 USDC]
+    end
+
+    subgraph "Settlement Layer - Base Blockchain"
+        BaseRPC[Base Sepolia<br/>RPC Node]
+        InvoiceNFT[InvoiceNFT.sol<br/>ERC-721 Contract]
+        LoanEscrow[LoanEscrow.sol<br/>Escrow Contract]
+        BaseExplorer[BaseScan Explorer]
+    end
+
+    subgraph "AI Agent Intelligence - Anthropic SDK"
+        BusinessAgent[Business Agent<br/>Claude Sonnet 4.5]
+        LenderAgent[Lender Agent<br/>Claude Sonnet 4.5]
+        AnalystAgent[Credit Analyst<br/>Claude Sonnet 4.5]
+        AgentRunner[Agent Runner<br/>agent-runner.ts]
+
+        AgentTools[Agent Tools]
+        StripeTools[Stripe Tools<br/>check_balance]
+        LocusTools[Locus Tools<br/>transfer, check_balance]
+        BaseTools[Base Tools<br/>mint_nft, create_loan]
+
+        AgentTools --> StripeTools
+        AgentTools --> LocusTools
+        AgentTools --> BaseTools
+    end
+
+    subgraph "Frontend - Next.js"
+        NextApp[Next.js App]
+        Dashboard[Agent Dashboard]
+        FundingUI[Funding Interface]
+    end
+
+    User -->|$1000 USD| StripeCheckout
+    StripeCheckout -->|Payment Intent| StripePlatform
+    StripePlatform -->|Transfer| StripeConnect2
+
+    StripePlatform -.->|webhook: transfer.created| WebhookHandler
+    WebhookHandler -->|verify signature| ConvexAPI
+    WebhookHandler -->|store event| ConvexDB
+    WebhookHandler -->|deposit USDC| LocusService
+
+    FundingAPI -->|convert 1:1| LocusService
+    LocusService -->|deposit| LocusWallet2
+
+    FundingAPI <-->|query/mutate| ConvexDB
+    AgentRegistry <-->|manage| ConvexDB
+
+    LocusService -->|manages| LocusWallet1
+    LocusService -->|manages| LocusWallet2
+    LocusService -->|manages| LocusWallet3
+    LocusService -->|manages| LocusWallet4
+
+    LocusWallet2 -->|$20 USDC| LocusWallet3
+    LocusWallet1 -->|$800 USDC| LocusWallet4
+
+    BusinessAgent -->|mint NFT| BaseTools
+    LenderAgent -->|create loan| BaseTools
+    BaseTools -->|ethers.js| BaseRPC
+    BaseRPC -->|calls| InvoiceNFT
+    BaseRPC -->|calls| LoanEscrow
+
+    InvoiceNFT -.->|locked as collateral| LoanEscrow
+    LoanEscrow -.->|$800 ETH| LocusWallet1
+
+    AgentRunner -->|executes| BusinessAgent
+    AgentRunner -->|executes| LenderAgent
+    AgentRunner -->|executes| AnalystAgent
+
+    BusinessAgent -->|uses| AgentTools
+    LenderAgent -->|uses| AgentTools
+    AnalystAgent -->|uses| AgentTools
+
+    StripeTools -->|API calls| StripeConnect1
+    StripeTools -->|API calls| StripeConnect2
+    StripeTools -->|API calls| StripeConnect3
+    LocusTools -->|transfer/balance| LocusService
+
+    NextApp -->|subscribe| ConvexDB
+    Dashboard -->|query| FundingAPI
+    Dashboard -->|query| AgentRegistry
+    FundingUI -->|execute| FundingAPI
+
+    BaseExplorer -.->|view transactions| LoanEscrow
+    BaseExplorer -.->|view NFTs| InvoiceNFT
+
+    style User fill:#e1f5ff
+    style StripePlatform fill:#635bff,color:#fff
+    style ConvexDB fill:#f97316,color:#fff
+    style LocusService fill:#22c55e,color:#fff
+    style InvoiceNFT fill:#0052ff,color:#fff
+    style LoanEscrow fill:#0052ff,color:#fff
+    style BusinessAgent fill:#ff6b6b,color:#fff
+    style LenderAgent fill:#4ecdc4,color:#fff
+    style AnalystAgent fill:#ffe66d,color:#000
+                    </div>
+                </div>
+            </section>
+
+            <section id="flow">
+                <h2>End-to-End Data Flow</h2>
+                <p>
+                    This sequence diagram shows the complete autonomous lending flow from user funding
+                    through loan execution to final settlement.
+                </p>
+
+                <div class="diagram">
+                    <div class="mermaid">
+sequenceDiagram
+    participant User as Human User
+    participant Stripe as Stripe Platform
+    participant Convex as Convex Backend
+    participant Locus as Locus Service
+    participant Business as Business Agent
+    participant Lender as Lender Agent
+    participant Analyst as Credit Analyst
+    participant Base as Base Blockchain
+
+    Note over User,Base: Step 1: Fund Lender Agent
+    User->>Stripe: Pay $1000 (credit card)
+    Stripe->>Stripe: Create transfer to Connect account
+    Stripe-->>Convex: Webhook: transfer.created
+    Convex->>Locus: Deposit 1000 USDC to Lender
+    Note over Lender: Lender: 1000 USDC
+
+    Note over User,Base: Step 2: Mint Invoice NFT
+    Business->>Base: mint(business, debtor, 1000 ETH, 30 days)
+    Base-->>Business: Invoice NFT #0
+    Note over Business: Has Invoice NFT worth $1000
+
+    Note over User,Base: Step 3: Request Loan
+    Business->>Lender: Request $800 loan<br/>(collateral: Invoice NFT #0)
+    Note over Lender: Needs credit analysis
+
+    Note over User,Base: Step 4-5: Credit Analysis (Agent-to-Agent Payment)
+    Lender->>Analyst: Request credit report
+    Lender->>Locus: Transfer 20 USDC to Analyst
+    Locus->>Locus: Deduct 20 from Lender
+    Locus->>Locus: Add 20 to Analyst
+    Note over Lender: Balance: 980 USDC
+    Note over Analyst: Balance: 20 USDC
+    Analyst->>Lender: Credit report (Risk: 7/10, Recommend: 80% advance, 5% interest)
+
+    Note over User,Base: Step 6: Execute Loan
+    Lender->>Base: Approve escrow to transfer NFT #0
+    Base-->>Lender: Approval confirmed
+    Lender->>Base: createLoan(business, NFT#0, 800 ETH, 40 ETH)
+    Base->>Base: Lock Invoice NFT #0 in escrow
+    Base->>Base: Transfer 800 ETH to Business
+    Base-->>Lender: Loan #0 created
+    Note over Business: Received 800 ETH from escrow
+    Note over Lender: 800 ETH locked in escrow
+
+    Note over User,Base: Step 7: Pay for Compute
+    Business->>Locus: Transfer 800 USDC to Compute Provider
+    Locus->>Locus: Deduct 800 from Business
+    Locus->>Locus: Add 800 to Compute Provider
+    Note over Business: Balance: 0 USDC (spent on compute)
+
+    Note over User,Base: Step 8: Settlement (30 days later - simulated)
+    Note over Base: Debtor pays 1000 ETH to escrow
+    Base->>Base: settleLoan(0, 1000 ETH)
+    Base->>Base: Pay Lender 840 ETH (800 + 40 interest)
+    Base->>Base: Pay Business 160 ETH (remaining)
+    Base->>Base: Return Invoice NFT to Business
+    Note over Lender: 840 ETH profit (40 ETH interest)
+    Note over Business: 160 ETH profit + NFT returned
+    Note over Analyst: 20 USDC earned
+                    </div>
+                </div>
+            </section>
+
+            <section id="locus">
+                <h2>Locus Payment Layer (Detailed)</h2>
+                <p>
+                    Locus serves as the agent payment layer, enabling fast USDC transfers between AI agents.
+                    This diagram shows how Locus fits between the fiat layer (Stripe) and settlement layer (Base).
+                </p>
+
+                <div class="diagram">
+                    <div class="mermaid">
+graph TB
+    subgraph "INPUT: Fiat On-Ramp"
+        User[Human User<br/>💳 Credit Card]
+        Stripe[Stripe Platform<br/>$1000 USD]
+    end
+
+    subgraph "CONVERSION: Platform Backend"
+        Convex[Convex Backend<br/>Webhook Handler]
+        Conversion[USD → USDC<br/>1:1 Conversion<br/>Mock for demo]
+    end
+
+    subgraph "LOCUS LAYER: Agent Commerce"
+        LocusService[Locus Service<br/>src/services/locus.service.ts]
+
+        subgraph "Locus Wallets (USDC Balances)"
+            W1[Business Agent<br/>💰 0 → 800 → 0 USDC]
+            W2[Lender Agent<br/>💰 0 → 1000 → 980 → 840 USDC]
+            W3[Analyst Agent<br/>💰 0 → 20 USDC]
+            W4[Compute Provider<br/>💰 0 → 800 USDC]
+        end
+
+        LocusOps[Locus Operations]
+        Deposit[📥 depositUSDC<br/>Add funds to wallet]
+        Transfer[💸 transfer<br/>Agent-to-agent payment]
+        Balance[🔍 getBalance<br/>Check wallet balance]
+
+        LocusService --> LocusOps
+        LocusOps --> Deposit
+        LocusOps --> Transfer
+        LocusOps --> Balance
+    end
+
+    subgraph "OUTPUT: Blockchain Settlement"
+        Base[Base Smart Contract<br/>LoanEscrow.sol]
+        Settlement[Final Settlement<br/>840 USDC to Lender<br/>160 USDC to Business]
+    end
+
+    User -->|1. Fund Agent| Stripe
+    Stripe -->|2. Webhook| Convex
+    Convex -->|3. Convert| Conversion
+    Conversion -->|4. Deposit| LocusService
+    LocusService -->|5. Credit to Wallet| W2
+
+    W2 -.->|Payment #1<br/>20 USDC<br/>Credit Analysis Fee| W3
+    W1 -.->|Payment #2<br/>800 USDC<br/>H200 Compute Rental| W4
+
+    LocusService -->|manages| W1
+    LocusService -->|manages| W2
+    LocusService -->|manages| W3
+    LocusService -->|manages| W4
+
+    W2 -.->|Loan Funding<br/>via Base Contract| Base
+    Base -.->|Settlement| Settlement
+    Settlement -.->|Update Balances| W2
+    Settlement -.->|Update Balances| W1
+
+    style User fill:#e1f5ff
+    style Stripe fill:#635bff,color:#fff
+    style Convex fill:#f97316,color:#fff
+    style LocusService fill:#22c55e,color:#fff
+    style W1 fill:#fef3c7
+    style W2 fill:#fef3c7
+    style W3 fill:#fef3c7
+    style W4 fill:#fef3c7
+    style Base fill:#0052ff,color:#fff
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>Why Locus?</h4>
+                    <p style="margin: 0;">
+                        Traditional payment systems (Stripe, PayPal) were designed for humans, not agents.
+                        Locus is purpose-built for autonomous agent commerce with fast USDC transfers,
+                        low fees on micro-payments, and programmatic APIs.
+                    </p>
+                </div>
+            </section>
+
+            <section id="transactions">
+                <h2>Locus Transaction Types</h2>
+
+                <h3>Deposit (Stripe → Locus)</h3>
+                <div class="diagram">
+                    <div class="mermaid">
+sequenceDiagram
+    participant Stripe
+    participant Webhook as Convex Webhook
+    participant Locus as LocusService
+    participant Wallet as Lender Wallet
+
+    Note over Stripe: transfer.created event
+    Stripe->>Webhook: POST /stripe/webhook
+    Note over Webhook: eventType: transfer.created<br/>amount: $1000
+
+    Webhook->>Webhook: Verify signature
+    Webhook->>Webhook: Record event in DB
+
+    Webhook->>Locus: depositUSDC(lender-001, 1000)
+    Locus->>Locus: currentBalance = 0
+    Locus->>Locus: newBalance = 0 + 1000 = 1000
+    Locus->>Wallet: Set balance to 1000 USDC
+
+    Locus-->>Webhook: transactionId: locus_tx_...
+    Webhook->>Webhook: Update funding transaction status
+
+    Note over Wallet: Balance: 1000 USDC ✅
+                    </div>
+                </div>
+
+                <h3>Transfer (Agent → Agent)</h3>
+                <div class="diagram">
+                    <div class="mermaid">
+sequenceDiagram
+    participant Lender as Lender Agent
+    participant Tool as Locus Tools
+    participant Locus as LocusService
+    participant LenderWallet as Lender Wallet<br/>(980 USDC)
+    participant AnalystWallet as Analyst Wallet<br/>(0 USDC)
+
+    Lender->>Tool: transfer_usdc<br/>(from: lender-001, to: analyst-001, amount: 20)
+    Tool->>Locus: transfer(lender-001, analyst-001, 20)
+
+    Locus->>LenderWallet: Get balance
+    LenderWallet-->>Locus: 1000 USDC
+
+    Locus->>Locus: Validate: 1000 >= 20 ✅
+
+    Locus->>LenderWallet: Deduct 20 USDC
+    Note over LenderWallet: 1000 - 20 = 980 USDC
+
+    Locus->>AnalystWallet: Add 20 USDC
+    Note over AnalystWallet: 0 + 20 = 20 USDC
+
+    Locus->>Locus: Generate transaction ID
+    Locus-->>Tool: transactionId: locus_tx_..._lender-001_to_analyst-001
+
+    Tool-->>Lender: Transfer complete ✅
+
+    Note over LenderWallet: Final: 980 USDC
+    Note over AnalystWallet: Final: 20 USDC (earned)
+                    </div>
+                </div>
+            </section>
+
+            <section id="state">
+                <h2>State Management: Current vs. Proposed</h2>
+
+                <h3>Current: Global Map (Hackathon)</h3>
+                <p>Quick fix for state isolation bug - works for demo but not production.</p>
+
+                <div class="diagram">
+                    <div class="mermaid">
+graph TB
+    subgraph "Current: Global Map (In-Memory)"
+        Map[(Global Map<br/>agentId → balance)]
+        L1[Agent 1: 1000 USDC]
+        L2[Agent 2: 20 USDC]
+        L3[Agent 3: 800 USDC]
+
+        Map --> L1
+        Map --> L2
+        Map --> L3
+    end
+
+    Restart[Server Restart]
+    Restart -.->|💥 Data Lost| Map
+
+    style Map fill:#fef3c7
+    style Restart fill:#fee2e2,color:#991b1b
+                    </div>
+                </div>
+
+                <h3>Proposed: Convex Database (Production)</h3>
+                <p>
+                    Persistent storage with real-time subscriptions - see
+                    <a href="https://github.com/micahstubbs/ycagentpayhack/issues/2" target="_blank">Issue #2</a>
+                    for migration plan.
+                </p>
+
+                <div class="diagram">
+                    <div class="mermaid">
+graph TB
+    subgraph "Proposed: Convex Database (Persistent)"
+        ConvexDB[(Convex Database)]
+
+        Balances[locusBalances Table]
+        B1[business-001: 160 USDC]
+        B2[lender-001: 840 USDC]
+        B3[analyst-001: 20 USDC]
+
+        Transactions[locusTransactions Table]
+        T1[TX1: Deposit 1000 to lender]
+        T2[TX2: Transfer 20 to analyst]
+        T3[TX3: Transfer 800 to compute]
+
+        ConvexDB --> Balances
+        ConvexDB --> Transactions
+
+        Balances --> B1
+        Balances --> B2
+        Balances --> B3
+
+        Transactions --> T1
+        Transactions --> T2
+        Transactions --> T3
+    end
+
+    Frontend[Next.js Frontend]
+    Frontend -->|Real-time Subscribe| ConvexDB
+
+    Restart[Server Restart]
+    Restart -.->|✅ Data Persists| ConvexDB
+
+    style ConvexDB fill:#f97316,color:#fff
+    style Restart fill:#dcfce7,color:#166534
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>Migration Benefits</h4>
+                    <ul style="margin: 0.5rem 0 0 1.5rem;">
+                        <li>Balances persist across restarts</li>
+                        <li>Complete transaction history</li>
+                        <li>Real-time frontend subscriptions</li>
+                        <li>Production-ready architecture</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>Technology Stack</h2>
+                <div class="diagram">
+                    <div class="mermaid">
+mindmap
+  root((Invoice-Backed<br/>Lending<br/>Marketplace))
+    Frontend
+      Next.js 15
+      React 19
+      Tailwind CSS
+      Convex React
+    Backend
+      Convex Serverless
+        HTTP Actions
+        Mutations
+        Queries
+        Real-time DB
+      TypeScript
+      Node.js
+    Payments
+      Stripe
+        Connect API
+        Transfers
+        Webhooks
+        Payment Intents
+      Locus Mock
+        USDC Deposits
+        Transfers
+        Balance Tracking
+    Blockchain
+      Base Sepolia L2
+        InvoiceNFT
+        LoanEscrow
+      Hardhat
+      ethers.js v6
+      OpenZeppelin
+    AI Agents
+      Anthropic SDK
+        Claude Sonnet 4.5
+        Tool Use
+        Message Loop
+      Agent Tools
+        Stripe Tools
+        Locus Tools
+        Base Tools
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <h3 style="margin-bottom: 1rem;">Invoice-Backed Lending Marketplace for AI Agents</h3>
+            <p>Built for <strong>Agentic Payments Hackathon</strong> by Locus @ YC HQ - November 15, 2025</p>
+            <p style="margin-top: 1rem;">
+                <a href="https://github.com/micahstubbs/ycagentpayhack" target="_blank">View on GitHub</a> |
+                <a href="https://github.com/micahstubbs/ycagentpayhack/pull/1" target="_blank">Pull Request #1</a> |
+                <a href="https://github.com/micahstubbs/ycagentpayhack/issues" target="_blank">Issues</a>
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                Powered by: Stripe Connect • Locus • Base L2 • Anthropic SDK • Convex
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

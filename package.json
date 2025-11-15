@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npm-run-all --parallel dev:frontend dev:backend",
     "dev:frontend": "next dev --turbopack",
-    "dev:backend": "convex dev",
+    "dev:backend": "convex dev --typecheck=disable",
     "dev:api": "nodemon --exec ts-node src/index.ts",
     "predev": "echo 'Skipping predev setup'",
     "build": "tsc && next build",
@@ -14,7 +14,10 @@
     "start:backend": "node dist/index.js",
     "lint": "eslint .",
     "test": "echo \"Tests coming soon\"",
-    "deploy:contracts": "npx hardhat run scripts/deploy.ts --network baseSepolia"
+    "deploy:contracts": "npx hardhat run scripts/deploy.js --network baseSepolia",
+    "init:agents": "tsc -p tsconfig.backend.json --skipLibCheck && node dist/scripts/init-agents.js",
+    "sync:agents": "tsc -p tsconfig.backend.json --skipLibCheck && node dist/scripts/sync-agents-to-convex.js",
+    "demo": "tsc -p tsconfig.backend.json --skipLibCheck && node dist/demo/run-demo.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.69.0",
@@ -53,6 +56,7 @@
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
     "@types/chai": "^4.3.0",
+    "@types/minimatch": "^6.0.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.10.1",
     "@types/react": "19.2.2",

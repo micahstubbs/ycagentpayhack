@@ -1,0 +1,1 @@
+- we are using pnpm for convex. prefer pnpm to yarn or npm.
