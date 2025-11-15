@@ -14,7 +14,7 @@
     "start:backend": "node dist/index.js",
     "lint": "eslint .",
     "test": "echo \"Tests coming soon\"",
-    "deploy:contracts": "npx hardhat run scripts/deploy.ts --network baseSepolia"
+    "deploy:contracts": "npx hardhat run scripts/deploy.js --network baseSepolia"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.69.0",
