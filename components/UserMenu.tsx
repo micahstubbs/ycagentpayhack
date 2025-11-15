@@ -42,6 +42,14 @@ export function UserMenu({ children }: { children: ReactNode }) {
 function SignOutButton() {
   const { signOut } = useAuthActions();
   return (
-    <DropdownMenuItem onClick={() => void signOut()}>Sign out</DropdownMenuItem>
+    <DropdownMenuItem 
+      onClick={() => {
+        void signOut().then(() => {
+          window.location.href = "/";
+        });
+      }}
+    >
+      Sign out
+    </DropdownMenuItem>
   );
 }
