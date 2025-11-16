@@ -208,8 +208,8 @@ export const GetStarted = () => {
                 boxShadow: '0 10px 25px -5px rgba(170, 196, 245, 0.3)'
               }}
             >
-              <Link href="/product" className="flex items-center">
-                Launch Demo
+              <Link href="/demo" className="flex items-center">
+                Try Interactive Demo
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
@@ -219,8 +219,8 @@ export const GetStarted = () => {
               variant="outline" 
               className="h-12 min-w-[180px] rounded-full border-neutral-300 bg-transparent px-8 text-base font-medium text-neutral-900 transition-all hover:bg-neutral-50 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-900"
             >
-              <Link href="https://github.com" target="_blank">
-                View on GitHub
+              <Link href="/signin">
+                Sign In
               </Link>
             </Button>
           </div>

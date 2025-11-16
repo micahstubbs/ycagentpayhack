@@ -33,7 +33,7 @@ export default function SplashPageLayout({
               Docs
             </Link>
             <SimpleThemeToggle />
-            <Link href="/product">
+            <Link href="/signin">
               <Button 
                 size="sm" 
                 className="h-9 rounded-full bg-neutral-900 px-6 text-sm font-medium text-white hover:bg-neutral-800 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-100"
