@@ -12,7 +12,7 @@
 **Time Taken**: ~30 minutes
 
 **Configured:**
-- ✅ Stripe account: IntentiveAI sandbox
+- ✅ Stripe account: IntentiveAI sandbox (acct_1SQlFPQ3MsurPJb4)
 - ✅ Platform account ID: `acct_1SQlFHLRpIkSpfgf`
 - ✅ Secret key: Added to `.env` (sk_test_51SQlFPQ...)
 - ✅ Stripe Connect: Enabled (Platform mode, Accounts v2 API)
@@ -48,10 +48,26 @@ Response: API works
 
 ---
 
+### ✅ Issue #7: Base Blockchain & Smart Contract Deployment
+**Completed**: 2025-11-15
+**Time Taken**: ~20 minutes
+
+**Deployed:**
+- ✅ Wallet configured: 0x6bDf2ea1f66ae2b6dc4CeF7852820C2C4A1a1404
+- ✅ Testnet ETH obtained: 0.0038 ETH
+- ✅ InvoiceNFT deployed: `0x243682Aae640EA5C111CbA6955D2EdB9BA666774`
+- ✅ LoanEscrow deployed: `0x41Ca6F4EeD504F2868f63912bB966f4F5F883951`
+- ✅ Verified on BaseScan: Both contracts visible
+
+**BaseScan Links:**
+- InvoiceNFT: https://sepolia.basescan.org/address/0x243682Aae640EA5C111CbA6955D2EdB9BA666774
+- LoanEscrow: https://sepolia.basescan.org/address/0x41Ca6F4EeD504F2868f63912bB966f4F5F883951
+
+---
+
 ## Pending Issues
 
-- [ ] Issue #6: Convex Backend Deployment
-- [ ] Issue #7: Base Blockchain & Smart Contracts
+- [ ] Issue #6: Convex Backend - Add environment variables to Convex
 - [ ] Issue #8: Initialize Agents
 - [ ] Issue #10: Frontend Configuration
 - [ ] Issue #9: Test Complete Demo Flow
@@ -67,15 +83,15 @@ Response: API works
 - `ANTHROPIC_API_KEY` ✅
 - `NEXT_PUBLIC_CONVEX_URL` ✅ (https://glad-gull-498.convex.cloud)
 - `CONVEX_DEPLOYMENT` ✅ (dev:glad-gull-498)
+- `BASE_RPC_URL` ✅
+- `PRIVATE_KEY` ✅
+- `INVOICE_NFT_ADDRESS` ✅
+- `LOAN_ESCROW_ADDRESS` ✅
 
-### Pending ⏳
-- `BASE_RPC_URL` (Issue #7)
-- `PRIVATE_KEY` (Issue #7)
-- `INVOICE_NFT_ADDRESS` (Issue #7 - after deployment)
-- `LOAN_ESCROW_ADDRESS` (Issue #7 - after deployment)
+### All Required Variables Complete! ✅
 
 ---
 
-## Progress: 2/7 setup issues complete (29%)
+## Progress: 3/7 setup issues complete (43%)
 
-**Next**: Issue #6 - Convex Backend Deployment (~45 minutes)
+**Next**: Issue #6 - Add environment variables to Convex Dashboard
