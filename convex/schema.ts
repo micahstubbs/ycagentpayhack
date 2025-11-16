@@ -43,4 +43,22 @@ export default defineSchema({
     locusWalletAddress: v.string(),
     baseWalletAddress: v.string(),
   }).index("by_agent_id", ["agentId"]),
+
+  // Loan requests and tracking
+  loanRequests: defineTable({
+    userId: v.id("users"),
+    invoiceAmount: v.number(),
+    loanAmount: v.number(),
+    invoiceTokenId: v.optional(v.number()),
+    debtorAddress: v.string(),
+    daysUntilDue: v.number(),
+    purpose: v.string(),
+    status: v.string(), // "pending", "analyzing", "approved", "rejected", "disbursed", "settled"
+    creditScore: v.optional(v.number()),
+    interestRate: v.optional(v.number()),
+    loanId: v.optional(v.number()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }).index("by_user", ["userId"])
+    .index("by_status", ["status"]),
 });

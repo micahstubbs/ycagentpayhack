@@ -13,6 +13,7 @@ import type * as auth from "../auth.js";
 import type * as funding from "../funding.js";
 import type * as fundingQueries from "../fundingQueries.js";
 import type * as http from "../http.js";
+import type * as loans from "../loans.js";
 import type * as locusIntegration from "../locusIntegration.js";
 import type * as messages from "../messages.js";
 import type * as stripeWebhookHandlers from "../stripeWebhookHandlers.js";
@@ -31,6 +32,7 @@ declare const fullApi: ApiFromModules<{
   funding: typeof funding;
   fundingQueries: typeof fundingQueries;
   http: typeof http;
+  loans: typeof loans;
   locusIntegration: typeof locusIntegration;
   messages: typeof messages;
   stripeWebhookHandlers: typeof stripeWebhookHandlers;
