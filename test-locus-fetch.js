@@ -14,7 +14,7 @@ async function testLocusAPI() {
     const response = await fetch('https://api.uselocus.com/v1/payment-context', {
       method: 'GET',
       headers: {
-        'x-api-key': 'locus_dev_4e28xFLsPZElgXzjawhiolE8wLVNu69l',
+        'x-api-key': 'YOUR_LOCUS_API_KEY_HERE',
         'Content-Type': 'application/json'
       },
       agent: agent
