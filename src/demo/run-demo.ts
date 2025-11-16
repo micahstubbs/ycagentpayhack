@@ -52,19 +52,19 @@ async function runDemo() {
 
   // Step 1: Fund lender agent
   console.log('\n📍 Step 1: Fund Lender Agent with $1000');
-  console.log('(Simulating Stripe funding flow)');
+  console.log('(Simulating Stripe funding flow - using mock mode for demo)');
 
-  // Transfer to Stripe Connect account (simulated)
-  await stripeService.transferToConnectAccount(
-    lenderAgentData.stripeConnectAccountId,
-    1000,
-    'lender-001'
-  );
+  // NOTE: Real Stripe transfers require Connect account onboarding
+  // For hackathon demo, we skip the real transfer and directly deposit to Locus
+  // In production, this would happen via Stripe webhook after transfer.created event
+
+  console.log('[Demo] Skipping real Stripe transfer (requires account onboarding)');
+  console.log('[Demo] Directly depositing 1000 USDC to Locus (simulating webhook result)');
 
   // Simulate webhook processing - deposit USDC to Locus
   await locusService.depositUSDC('lender-001', 1000);
 
-  console.log('✅ Lender funded: $1000 → 1000 USDC');
+  console.log('✅ Lender funded: $1000 → 1000 USDC (simulated)');
 
   // Step 2: Mint invoice NFT for business agent
   console.log('\n📍 Step 2: Business Agent Mints Invoice NFT');
