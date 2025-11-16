@@ -8,7 +8,9 @@ import Anthropic from '@anthropic-ai/sdk';
 import { allTools, executeTool } from './tools';
 import * as dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({ path: '.env.local' });
+
+console.log("wwaefewafea", process.env.ANTHROPIC_API_KEY)
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!,

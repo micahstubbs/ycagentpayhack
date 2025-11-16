@@ -43,4 +43,39 @@ export default defineSchema({
     locusWalletAddress: v.string(),
     baseWalletAddress: v.string(),
   }).index("by_agent_id", ["agentId"]),
+
+  // Agent messages (for inter-agent communication)
+  agentMessages: defineTable({
+    messageId: v.string(),
+    from: v.string(), // sender agent ID
+    to: v.string(), // recipient agent ID
+    type: v.string(), // "request", "response", "notification"
+    subject: v.string(),
+    payload: v.any(),
+    read: v.boolean(),
+    timestamp: v.number(),
+  })
+    .index("by_recipient", ["to", "read"])
+    .index("by_message_id", ["messageId"]),
+
+  // Agent execution history
+  agentExecutions: defineTable({
+    agentId: v.string(),
+    startTime: v.number(),
+    endTime: v.optional(v.number()),
+    status: v.string(), // "running", "completed", "failed"
+    turns: v.number(),
+    toolCalls: v.number(),
+    finalResponse: v.optional(v.string()),
+    error: v.optional(v.string()),
+  }).index("by_agent", ["agentId", "startTime"]),
+
+  // Agent execution logs (for real-time display)
+  agentLogs: defineTable({
+    executionId: v.id("agentExecutions"),
+    timestamp: v.number(),
+    level: v.string(), // "info", "tool", "thinking", "error"
+    message: v.string(),
+    data: v.optional(v.any()),
+  }).index("by_execution", ["executionId", "timestamp"]),
 });

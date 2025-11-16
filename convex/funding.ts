@@ -229,7 +229,14 @@ export const getAgentBalances = action({
   args: {
     agentId: v.string(),
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<{
+    agentId: string;
+    balances: {
+      stripeUsd: number;
+      locusUsdc: number;
+      convexUsdc: number;
+    };
+  }> => {
     const { agentId } = args;
 
     console.log(`[Funding] Getting balances for agent ${agentId}`);
@@ -278,11 +285,10 @@ export const getAgentBalances = action({
     return {
       agentId,
       balances: {
-        stripe_usd: stripeBalance,
-        locus_usdc: convexBalance.totalUsdc, // Use Convex-tracked balance
-        convex_total_deposited: convexBalance.totalUsdc,
+        stripeUsd: stripeBalance,
+        locusUsdc: convexBalance.totalUsdc, // Use Convex-tracked balance
+        convexUsdc: convexBalance.totalUsdc,
       },
-      transactionCount: convexBalance.transactionCount,
     };
   },
 });

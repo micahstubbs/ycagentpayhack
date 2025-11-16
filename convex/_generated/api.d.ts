@@ -8,6 +8,11 @@
  * @module
  */
 
+import type * as agentCommunication from "../agentCommunication.js";
+import type * as agentOrchestrator from "../agentOrchestrator.js";
+import type * as agentPrompts from "../agentPrompts.js";
+import type * as agentRunner from "../agentRunner.js";
+import type * as agentTools from "../agentTools.js";
 import type * as agents from "../agents.js";
 import type * as auth from "../auth.js";
 import type * as funding from "../funding.js";
@@ -26,6 +31,11 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  agentCommunication: typeof agentCommunication;
+  agentOrchestrator: typeof agentOrchestrator;
+  agentPrompts: typeof agentPrompts;
+  agentRunner: typeof agentRunner;
+  agentTools: typeof agentTools;
   agents: typeof agents;
   auth: typeof auth;
   funding: typeof funding;

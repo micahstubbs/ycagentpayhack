@@ -16,6 +16,8 @@
     "test": "echo \"Tests coming soon\"",
     "test:locus": "tsx src/test-locus-integration.ts",
     "demo": "tsx src/demo/orchestrate-agents.ts",
+    "test:convex-agents": "tsx src/test-convex-agents.ts",
+    "seed:agents": "tsx src/seed-agents.ts",
     "deploy:contracts": "npx hardhat run scripts/deploy.ts --network baseSepolia"
   },
   "dependencies": {
