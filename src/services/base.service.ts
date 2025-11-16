@@ -115,7 +115,7 @@ export class BaseService {
     const receipt = await tx.wait();
 
     // Parse event to get loan ID
-    const loanCreatedEvent = contract.interface.getEvent('LoanCreated');
+    const loanCreatedEvent = escrowContract.interface.getEvent('LoanCreated');
     if (!loanCreatedEvent) {
       throw new Error('LoanCreated event not found in contract interface');
     }
